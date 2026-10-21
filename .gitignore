@@ -1,0 +1,5 @@
+backend/target/
+backend/*.mv.db
+backend/.env
+firmware/esp8266_gateway/secrets.h
+*.log

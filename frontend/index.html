@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GridWatch Control Center</title>
+  <meta name="description" content="GridWatch transformer health, fault detection and RAG/LLM incident intelligence dashboard." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">GW</div>
+        <div>
+          <div class="brand-name">GridWatch</div>
+          <div class="brand-sub">Transformer Guardian</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a class="nav-item active" href="#overview">
+          <span class="nav-icon">⌂</span>
+          <span>Overview</span>
+        </a>
+        <a class="nav-item" href="#nodes">
+          <span class="nav-icon">◉</span>
+          <span>Sensor Nodes</span>
+        </a>
+        <a class="nav-item" href="#incidents">
+          <span class="nav-icon">⚠</span>
+          <span>Incidents</span>
+        </a>
+        <a class="nav-item" href="#assistant">
+          <span class="nav-icon">✦</span>
+          <span>AI Assistant</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="mini-label">SYSTEM MODE</div>
+        <div id="system-mode" class="mode-pill">Connecting…</div>
+        <div class="sidebar-note">Live polling · 3 seconds</div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SELF-DIAGNOSING INFRASTRUCTURE</div>
+          <h1>Control Center</h1>
+          <p class="subtitle">Real-time transformer health, fault fingerprints and grounded AI incident intelligence.</p>
+        </div>
+        <div class="topbar-status">
+          <div class="status-chip"><span id="backend-dot" class="dot pending"></span><span id="backend-status">Backend connecting</span></div>
+          <div class="status-chip"><span class="dot live"></span><span>Live telemetry</span></div>
+        </div>
+      </header>
+
+      <section id="overview" class="section-block">
+        <div class="kpi-grid">
+          <article class="kpi-card">
+            <div class="kpi-top"><span>Primary node health</span><span class="kpi-icon">01</span></div>
+            <div id="kpi-health-1" class="kpi-value">--</div>
+            <div id="kpi-state-1" class="kpi-caption">Waiting for telemetry</div>
+          </article>
+          <article class="kpi-card alert-kpi">
+            <div class="kpi-top"><span>Active alerts</span><span class="kpi-icon">!</span></div>
+            <div id="kpi-alerts" class="kpi-value">--</div>
+            <div id="kpi-alert-caption" class="kpi-caption">Across latest node states</div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-top"><span>LLM provider</span><span class="kpi-icon">AI</span></div>
+            <div id="kpi-provider" class="kpi-provider">--</div>
+            <div id="kpi-provider-caption" class="kpi-caption">Router status unavailable</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="nodes" class="section-block">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">FIELD TELEMETRY</div>
+            <h2>Physical sensor node</h2>
+          </div>
+          <div id="last-updated" class="muted">Last update: --</div>
+        </div>
+
+        <div class="node-grid">
+          <article class="node-card" data-node="1">
+            <div class="node-header">
+              <div>
+                <span class="node-tag">NODE 01</span>
+                <h3>Primary transformer</h3>
+              </div>
+              <span id="node-badge-1" class="state-badge neutral">OFFLINE</span>
+            </div>
+            <div class="node-health-row">
+              <div class="health-ring" id="health-ring-1"><div><strong id="health-1">--</strong><span>/100</span></div></div>
+              <div class="node-summary">
+                <div id="state-1" class="node-state">Waiting for telemetry</div>
+                <div id="buffer-1" class="node-buffer">Network: --</div>
+                <div class="node-buffer">Electrical load: not measured</div>
+              </div>
+            </div>
+            <div class="metric-grid">
+              <div class="metric"><span>Temperature</span><strong id="temp-1">--</strong><small>°C</small></div>
+              <div class="metric"><span>Rise rate</span><strong id="rise-1">--</strong><small>°C/s</small></div>
+              <div class="metric"><span>Ambient</span><strong id="ambient-1">--</strong><small>°C</small></div>
+              <div class="metric"><span>Fan diagnostic</span><strong id="fan-1">--</strong><small>driver / rotation</small></div>
+              <div class="metric"><span>Tamper beam</span><strong id="ir1-1">--</strong><small>IR1</small></div>
+              <div class="metric"><span>Rotation sensor</span><strong id="ir2-1">--</strong><small>IR2</small></div>
+              <div class="metric"><span>FSR</span><strong id="fsr-1">--</strong><small>raw</small></div>
+            </div>
+            <div class="chart-block">
+              <div class="chart-title"><span>Temperature trend</span><span>recent 20 samples</span></div>
+              <svg id="temp-chart-1" class="sparkline" viewBox="0 0 640 120" preserveAspectRatio="none" aria-label="Node 1 temperature trend"></svg>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="incidents" class="section-block two-col">
+        <div class="panel incident-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">RAG / LLM</div>
+              <h2>Latest incident intelligence</h2>
+            </div>
+            <span id="incident-provider" class="provider-badge">--</span>
+          </div>
+          <div id="incident-meta" class="incident-meta">No incident report available yet.</div>
+          <div id="incident-report" class="incident-report empty">Trigger a non-normal classification to generate a grounded incident report.</div>
+          <div id="incident-evidence" class="evidence-row"></div>
+        </div>
+
+        <div class="panel timeline-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">EVENT STREAM</div>
+              <h2>Recent events</h2>
+            </div>
+          </div>
+          <div id="timeline" class="timeline"><div class="empty-state">Waiting for readings…</div></div>
+        </div>
+      </section>
+
+      <section id="assistant" class="section-block">
+        <div class="panel assistant-panel">
+          <div class="assistant-copy">
+            <div class="eyebrow">GROUNDED ASSISTANT</div>
+            <h2>Ask GridWatch AI</h2>
+            <p>Questions are sent to <code>POST /api/ask</code> and answered from the transformer maintenance SOP loaded by the backend RAG layer.</p>
+          </div>
+          <div class="assistant-form">
+            <textarea id="question" rows="4" placeholder="Example: What should I do if the cooling fan does not spin up?"></textarea>
+            <div class="assistant-actions">
+              <div class="prompt-chips">
+                <button type="button" class="chip" data-question="What should I do if the cooling fan does not spin up?">Cooling failure</button>
+                <button type="button" class="chip" data-question="How should I respond to a confirmed tamper event?">Tamper</button>
+                <button type="button" class="chip" data-question="What does the health score represent?">Health score</button>
+              </div>
+              <button id="ask-btn" class="primary-btn">Ask GridWatch AI <span>→</span></button>
+            </div>
+          </div>
+          <div id="answer-box" class="answer-box hidden">
+            <div class="answer-header"><span>AI response</span><span id="answer-provider" class="provider-badge">--</span></div>
+            <p id="answer-text"></p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>GridWatch · Phase 1 demo dashboard</span>
+        <span>Backend: <code>http://localhost:8080</code></span>
+      </footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
